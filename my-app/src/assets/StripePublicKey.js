@@ -1,1 +1,0 @@
-export const stripePublishableKey = 'pk_test_40ENJmOTHcdxjGRF82ZXzSKV008AJktHn6'
