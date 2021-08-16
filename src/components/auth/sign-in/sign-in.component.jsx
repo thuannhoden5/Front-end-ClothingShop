@@ -7,6 +7,7 @@ import { SignInContainer, LinkContainer, Footer } from "./sign-in.styles";
 import axios from "../../../utils/axios";
 import { Link } from "react-router-dom";
 import ResetPassword from "../reset-password/reset-password.component";
+// import axios from "axios";
 
 const SignIn = () => {
   const [values, setValues] = useState({
@@ -32,7 +33,7 @@ const SignIn = () => {
       return;
     }
     try {
-      const res = await axios.post("/auth/sign-in", values);
+      const res = await axios.post("/user/login", values);
       console.log(res);
     } catch (err) {
       setErr(err.message);
