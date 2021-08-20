@@ -5,7 +5,7 @@ export const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: calc(80vh - 80px);
+  height: calc(90vh);
   background-color: #e8ebee;
 `;
 export const ResetContainer = styled.div`

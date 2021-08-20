@@ -49,7 +49,7 @@ const SignUp = () => {
       return;
     }
     try {
-      await axios.post("/auth/sign-up", values);
+      await axios.post("/user/register", values);
       setIsSucceeded(true);
     } catch (err) {
       setErr(err.message);
