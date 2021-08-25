@@ -8,10 +8,15 @@ import "./Navbar.styles.scss";
 import { createStructuredSelector } from "reselect";
 import { selectCartHidden } from "../../redux/cart/cart.selectors";
 import { selectCurrentUser } from "../../redux/user/user.selectors";
+import { setCurrentUser } from "../../redux/user/user.actions";
+// import {h}
 
-const CustomNavbar = ({ currentUser, ...props }) => {
+const CustomNavbar = ({ currentUser, setCurrentUser, ...props }) => {
   // console.log("toggle cart props", props);
   // console.log(history)
+  const handleClick = () => {
+    setCurrentUser(null);
+  };
   return (
     <div className="header">
       <Link className="logo-container" to="/">
@@ -24,11 +29,13 @@ const CustomNavbar = ({ currentUser, ...props }) => {
         <Link className="option" to="/contact">
           CONTACT
         </Link>
+
         {currentUser ? (
           <div
             className="option"
+            to="/shop"
             onClick={() => {
-              //   history.push("/");
+              handleClick();
             }}
           >
             SIGN OUT
@@ -49,5 +56,10 @@ const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
   hidden: selectCartHidden,
 });
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setCurrentUser: (user) => dispatch(setCurrentUser(user)),
+  };
+};
 
-export default connect(mapStateToProps)(CustomNavbar);
+export default connect(mapStateToProps, mapDispatchToProps)(CustomNavbar);

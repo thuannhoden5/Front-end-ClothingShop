@@ -14,36 +14,14 @@ import { selectCurrentUser } from "./redux/user/user.selectors";
 import SignIn from "./components/auth/sign-in/sign-in.component";
 import SignUp from "./components/auth/sign-up/sign-up.component";
 import ResetPassword from "./components/auth/reset-password/reset-password.component";
-<<<<<<< HEAD
-import Slidebar from "./components/slidebar/Slidebar";
-function App() {
-  return (
-    <>
-      <Header />
-      {/* <Header />
-      <Switch>
-        <Route exact path="/auth/signup" component={SignUp} />
-        <Route exact path="/auth/signin" component={SignIn} />
-        <Route exact path="/auth/resetpassword" component={ResetPassword} />
-      </Switch> */}
-      <Slidebar />
-    </>
-  );
-=======
-
+import Checkout from "./components/checkout/Checkout.component";
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      currentUser: null,
-    };
-  }
-
   unsubscribeFromAuth = null;
 
   componentDidMount() {
     const { setCurrentUser } = this.props;
+
+    // setCurrentUser(localStorage.getItem("user"));
   }
 
   componentWillUnmount() {
@@ -51,21 +29,33 @@ class App extends React.Component {
   }
 
   render() {
-    const { currentUser } = this.props;
+    console.log(this.props.currentUser);
     return (
       <div>
         <CustomNavbar />
 
         <Switch>
           <Route exact path="/" component={HomePage} />
-          <Route exact path="/auth/signup" component={SignUp} />
-          <Route exact path="/auth/signin" component={SignIn} />
+          <Route
+            exact
+            path="/auth/signup"
+            render={() =>
+              this.props.currentUser ? <Redirect to="/" /> : <SignUp />
+            }
+          />
+          <Route
+            exact
+            path="/auth/signin"
+            render={() =>
+              this.props.currentUser ? <Redirect to="/" /> : <SignIn />
+            }
+          />
           <Route exact path="/auth/resetpassword" component={ResetPassword} />
+          <Route exact path="/checkout" component={Checkout} />
         </Switch>
       </div>
     );
   }
->>>>>>> origin/master
 }
 
 const mapStateToProps = (state) => {

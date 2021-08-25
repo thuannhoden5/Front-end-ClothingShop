@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import CartItem from "../CartItem/CartItem.component";
 import { selectCartItems } from "../../redux/cart/cart.selectors";

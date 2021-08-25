@@ -7,9 +7,13 @@ import { SignInContainer, LinkContainer, Footer } from "./sign-in.styles";
 import axios from "../../../utils/axios";
 import { Link } from "react-router-dom";
 import ResetPassword from "../reset-password/reset-password.component";
+import { connect } from "react-redux";
+import { setCurrentUser } from "../../../redux/user/user.actions";
+import { selectCurrentUser } from "../../../redux/user/user.selectors";
 // import axios from "axios";
 
-const SignIn = () => {
+const SignIn = (props) => {
+  console.log(props);
   const [values, setValues] = useState({
     email: "",
     password: "",
@@ -34,7 +38,9 @@ const SignIn = () => {
     }
     try {
       const res = await axios.post("/user/login", values);
-      console.log(res);
+      props.setCurrentUser(res.data.data.user);
+      console.log(res.data.data.user);
+      localStorage.setItem("token", res.data.data.token);
     } catch (err) {
       setErr(err.message);
     } finally {
@@ -95,5 +101,16 @@ const SignIn = () => {
     </Container>
   );
 };
+const mapStateToProps = (state) => {
+  return {
+    currentUser: selectCurrentUser(state),
+  };
+};
 
-export default SignIn;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setCurrentUser: (user) => dispatch(setCurrentUser(user)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
