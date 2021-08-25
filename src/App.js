@@ -1,10 +1,7 @@
 import logo from "./logo.svg";
 import CustomNavbar from "./components/Navbar/Navbar";
 import HomePage from "./components/Homepage/HomePage.component";
-// import Navbar from './Components/Navbar/Navbar.component'
-// import Shop from './Components/Shop/Shop.component'
-// import Onboarding from './Components/Onboarding/Onboarding.component'
-// import CheckoutPage from './Components/Checkout/Checkout.component'
+import Shop from './components/Shop/Shop.component'
 import { Route, Switch, Redirect } from "react-router-dom";
 import React from "react";
 import "./App.css";
@@ -45,6 +42,7 @@ class App extends React.Component {
           <Route exact path="/auth/signup" component={SignUp} />
           <Route exact path="/auth/signin" component={SignIn} />
           <Route exact path="/auth/resetpassword" component={ResetPassword} />
+          <Route path='/shop' component={Shop} />
         </Switch>
       </div>
     );
