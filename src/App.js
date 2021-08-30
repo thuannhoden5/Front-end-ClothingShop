@@ -12,6 +12,7 @@ import SignIn from "./components/auth/sign-in/sign-in.component";
 import SignUp from "./components/auth/sign-up/sign-up.component";
 import ResetPassword from "./components/auth/reset-password/reset-password.component";
 import Checkout from "./components/checkout/Checkout.component";
+import Search from "./components/Search/inputsearch/Search.component";
 class App extends React.Component {
   unsubscribeFromAuth = null;
 
@@ -50,6 +51,7 @@ class App extends React.Component {
           <Route exact path="/auth/resetpassword" component={ResetPassword} />
           <Route exact path="/checkout" component={Checkout} />
           <Route path="/shop" component={Shop} />
+          <Route path="/search" component={Search} />
         </Switch>
       </div>
     );

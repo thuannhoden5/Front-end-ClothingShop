@@ -10,6 +10,7 @@ import ResetPassword from "../reset-password/reset-password.component";
 import { connect } from "react-redux";
 import { setCurrentUser } from "../../../redux/user/user.actions";
 import { selectCurrentUser } from "../../../redux/user/user.selectors";
+import axiosInstance from "../../../utils/axios";
 // import axios from "axios";
 
 const SignIn = (props) => {
@@ -36,17 +37,21 @@ const SignIn = (props) => {
       setErr("Email & password cannot be empty");
       return;
     }
-    try {
-      const res = await axios.post("/user/login", values);
-      props.setCurrentUser(res.data.data.user);
-      console.log(res.data.data.user);
-      localStorage.setItem("token", res.data.data.token);
-    } catch (err) {
-      setErr(err.message);
-    } finally {
-      // console.log(loading);
-      // setLoading(false);
-    }
+
+    axiosInstance
+      .post("/user/login", values)
+      .then((res) => {
+        console.log(res.data);
+        if (res.data.success) {
+          setIsSucceeded(true);
+          props.setCurrentUser(res.data.data.user);
+        } else {
+          setErr(res.data.message);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   return (
     <Container>

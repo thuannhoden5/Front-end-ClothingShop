@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import CustomButton from "../../custom-button/custom-button.component";
 import FormInput from "../../form-input/form-input.component";
+import axiosInstance from "../../../utils/axios";
 import {
   Container,
   FooterContainer,
@@ -10,8 +11,27 @@ import {
 } from "./reset-password.styles";
 const ResetPassword = () => {
   const [email, setEmail] = useState("");
+  const [err, setErr] = useState("");
+  const [isSucceeded, setIsSucceeded] = useState(false);
   const handleChange = (event) => {
     setEmail(event.target.value);
+  };
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setErr(false);
+    try {
+      const res = await axiosInstance.post("/user/sendNewPasswordToEmail", {
+        email: email,
+      });
+      console.log(res);
+      if (res.data.success) {
+        setIsSucceeded(true);
+      } else {
+        setErr(res.data.message);
+      }
+    } catch (err) {
+      console.log(err.message);
+    }
   };
   return (
     <Container>
@@ -19,6 +39,16 @@ const ResetPassword = () => {
         <div style={{ fontSize: 20, fontWeight: "bold" }}>
           Find Your Account
         </div>
+        {err && (
+          <div class="alert alert-danger" role="alert">
+            {err}
+          </div>
+        )}
+        {isSucceeded && (
+          <div class="alert alert-success" role="alert">
+            Check your mail to receive new password
+          </div>
+        )}
         <hr />
         <MainContainer>
           <FormInput
@@ -32,7 +62,7 @@ const ResetPassword = () => {
 
         <hr />
         <FooterContainer>
-          <form>
+          <form onSubmit={handleSubmit}>
             <CustomButton color="grey">
               <Link to="/">Cancel</Link>
             </CustomButton>

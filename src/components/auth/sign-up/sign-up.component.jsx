@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 // import Loading from "../share/loading/Loading.component";
 import { Container, SignUpContainer } from "./sign-up.styles";
-import axios from "../../../utils/axios";
+import axiosInstance from "../../../utils/axios";
 import CustomButton from "../../custom-button/custom-button.component";
 import FormInput from "../../form-input/form-input.component";
 import { ContainerImage } from "./sign-up.styles";
+import axios from "axios";
 
 const SignUp = () => {
   const [values, setValues] = useState({
@@ -14,6 +15,7 @@ const SignUp = () => {
     confirmPassword: "",
     address: "",
     phoneNumber: "",
+    role: "buyers",
   });
   const [err, setErr] = useState(null);
   const [isSucceeded, setIsSucceeded] = useState(false);
@@ -49,12 +51,18 @@ const SignUp = () => {
       return;
     }
     try {
-      await axios.post("/user/register", values);
-      setIsSucceeded(true);
+      const res = await axiosInstance.post("/user/register", {
+        ...values,
+        phoneNumber: "+84" + values.phoneNumber.slice(1),
+      });
+      if (res.data.success) {
+        setIsSucceeded(true);
+      } else {
+        setErr(res.message);
+      }
     } catch (err) {
-      setErr(err.message);
-    } finally {
-      // setLoading(false);
+      setErr("Cannot create a new account");
+      console.log(err);
     }
   };
 
