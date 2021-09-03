@@ -3,7 +3,7 @@ import "./styles.scss";
 
 const Slidebar = () => {
   return (
-    <div className="container">
+    <div className="container-slide">
       <div
         id="carouselExampleDark"
         className="carousel carousel-dark slide"

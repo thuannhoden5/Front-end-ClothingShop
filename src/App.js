@@ -12,9 +12,9 @@ import SignIn from "./components/auth/sign-in/sign-in.component";
 import SignUp from "./components/auth/sign-up/sign-up.component";
 import ResetPassword from "./components/auth/reset-password/reset-password.component";
 import Checkout from "./components/checkout/Checkout.component";
-import Search from "./components/Search/inputsearch/Search.component";
+import Search from "./components/Search/Search.component";
 class App extends React.Component {
-  unsubscribeFromAuth = null;
+  // unsubscribeFromAuth = null;
 
   componentDidMount() {
     const { setCurrentUser } = this.props;
@@ -22,9 +22,9 @@ class App extends React.Component {
     // setCurrentUser(localStorage.getItem("user"));
   }
 
-  componentWillUnmount() {
-    this.unsubscribeFromAuth();
-  }
+  // componentWillUnmount() {
+  //   this.unsubscribeFromAuth();
+  // }
 
   render() {
     console.log(this.props.currentUser);

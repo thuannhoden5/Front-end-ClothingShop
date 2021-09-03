@@ -27,7 +27,7 @@ const CustomNavbar = ({ currentUser, setCurrentUser, ...props }) => {
           SHOP
         </Link>
         <Link className="option" to="/contact">
-          CONTACTaa
+          CONTACT
         </Link>
 
         {currentUser ? (

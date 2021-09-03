@@ -24,13 +24,19 @@
 
 .body-container {
   height: 100%;
-  background-color: red;
+
   display: flex;
+  align-items: center;
+  justify-content: center;
   flex-basis: 150px;
   flex-wrap: wrap;
   .item {
     margin: 10px 20px;
   }
+}
+.header-result {
+  display: flex;
+  justify-content: space-between;
 }
 
 // Center & dribbble
