@@ -3,6 +3,7 @@ import "./Search.styles.scss";
 import { useState, useEffect } from "react";
 import CollectionItem from "../CollectionItem/Collectiontem.component";
 import CustomButton from "../custom-button/custom-button.component";
+import axiosInstance from "../../utils/axios";
 const Search = () => {
   const data = [
     { id: 1, name: "Hello", imageUrl: "fds", price: 100 },
@@ -16,13 +17,16 @@ const Search = () => {
   const [price, setPrice] = useState(10);
   const [q, setQ] = useState("");
   const [loading, setLoading] = useState(false);
-  const handleChange = (event) => {
-    setQ(event.target.value);
-    console.log(q);
-  };
-  const handleChangePrice = (event) => {
-    setPrice(event.target.value);
+
+  const handleChangePrice = async (event) => {
+    console.log("hello");
     console.log(event.target.value);
+    event.preventDefault();
+    setLoading(true);
+    const result = await axiosInstance.get(
+      `/product/findAllProductByFilter?fromPrice=${1}&toPrice=${1}`
+    );
+    console.log(result);
   };
   console.log(product);
 
@@ -32,42 +36,61 @@ const Search = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     setLoading(true);
+    console.log("tru");
   };
 
   return (
     <div className="container">
-      <form onSubmit={handleSubmit} action="/">
-        <input
-          type="search"
-          placeholder="Search ..."
-          name="q"
-          className="search"
-          autoComplete="off"
-          spellCheck="false"
-          onChange={handleChange}
-        />
-      </form>
+      <div className="checkbox">
+        <h2>Search Filter</h2>
+        <div>
+          <div>
+            <input
+              type="radio"
+              name="price"
+              value="0-10"
+              onChange={handleChangePrice}
+            />
+            <label for="price">0$ - 10$</label>
+          </div>
+          <div>
+            <input
+              type="radio"
+              name="price"
+              value="0-10"
+              onChange={handleChangePrice}
+            />
+            <label for="price">0$ - 10$</label>
+          </div>
+          <div>
+            <input
+              type="radio"
+              name="price"
+              value="0-10"
+              onChange={handleChangePrice}
+            />
+            <label for="price">0$ - 10$</label>
+          </div>
+          <div>
+            <input
+              type="radio"
+              name="price"
+              value="0-10"
+              onChange={handleChangePrice}
+            />
+            <label for="price">0$ - 10$</label>
+          </div>
+        </div>
+      </div>
       {loading ? (
-        <>
-          <div className="header-result">
-            <h1>Result for `{q}`</h1>
-
-            <div>
-              <label for="price">Choose Range Price</label>
-              <select name="price" id="" onChange={handleChangePrice}>
-                <option value="10"> 10</option>
-                <option value="20"> 20</option>
-              </select>
+        <div className="body-container">
+          <h1>Result for `{q}`</h1>
+          {product.map((item) => (
+            <div className="item" key={item.id}>
+              <CollectionItem item={item} key={item.id} />
             </div>
-          </div>
-          <div className="body-container">
-            {product.map((item) => (
-              <div className="item" key={item.id}>
-                <CollectionItem item={item} key={item.id} />
-              </div>
-            ))}
-          </div>
-        </>
+          ))}
+        </div>
       ) : (
         ""
       )}

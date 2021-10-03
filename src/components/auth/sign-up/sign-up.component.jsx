@@ -5,12 +5,10 @@ import axiosInstance from "../../../utils/axios";
 import CustomButton from "../../custom-button/custom-button.component";
 import FormInput from "../../form-input/form-input.component";
 import { ContainerImage } from "./sign-up.styles";
-import axios from "axios";
 
 const SignUp = () => {
   const [values, setValues] = useState({
     email: "",
-    password: "",
     password: "",
     confirmPassword: "",
     address: "",

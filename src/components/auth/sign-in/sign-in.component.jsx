@@ -4,7 +4,6 @@ import FormInput from "../../form-input/form-input.component";
 import { Container } from "./sign-in.styles";
 import Loading from "../../share/loading/Loading.component";
 import { SignInContainer, LinkContainer, Footer } from "./sign-in.styles";
-import axios from "../../../utils/axios";
 import { Link } from "react-router-dom";
 import ResetPassword from "../reset-password/reset-password.component";
 import { connect } from "react-redux";
@@ -44,6 +43,8 @@ const SignIn = (props) => {
         console.log(res.data);
         if (res.data.success) {
           setIsSucceeded(true);
+          console.log(res.data);
+          localStorage.setItem("token", res.data.data.token);
           props.setCurrentUser(res.data.data.user);
         } else {
           setErr(res.data.message);

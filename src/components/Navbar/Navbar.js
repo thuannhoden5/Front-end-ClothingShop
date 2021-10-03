@@ -36,6 +36,7 @@ const CustomNavbar = ({ currentUser, setCurrentUser, ...props }) => {
             to="/shop"
             onClick={() => {
               handleClick();
+              localStorage.removeItem("token");
             }}
           >
             SIGN OUT

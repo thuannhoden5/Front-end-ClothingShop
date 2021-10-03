@@ -1,12 +1,11 @@
 .container {
-  align-items: center;
   padding: 100px 20px;
   height: 100vh;
   width: 100%;
+  display: flex;
 }
 .container form {
-  display: flex;
-  flex-direction: column;
+  height: 50px;
 }
 .container .search {
   width: 130px;
@@ -26,9 +25,9 @@
   height: 100%;
 
   display: flex;
-  align-items: center;
+  // align-items: center;
   justify-content: center;
-  flex-basis: 150px;
+  // flex-basis: 100px;
   flex-wrap: wrap;
   .item {
     margin: 10px 20px;
@@ -36,7 +35,11 @@
 }
 .header-result {
   display: flex;
+
   justify-content: space-between;
+}
+.checkbox {
+  width: 30%;
 }
 
 // Center & dribbble

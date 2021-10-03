@@ -13,8 +13,10 @@ import SignUp from "./components/auth/sign-up/sign-up.component";
 import ResetPassword from "./components/auth/reset-password/reset-password.component";
 import Checkout from "./components/checkout/Checkout.component";
 import Search from "./components/Search/Search.component";
+import Profile from "./components/profile/Profile.component";
+import Article from "./components/article/Article.component";
 class App extends React.Component {
-  // unsubscribeFromAuth = null;
+  unsubscribeFromAuth = null;
 
   componentDidMount() {
     const { setCurrentUser } = this.props;
@@ -22,9 +24,9 @@ class App extends React.Component {
     // setCurrentUser(localStorage.getItem("user"));
   }
 
-  // componentWillUnmount() {
-  //   this.unsubscribeFromAuth();
-  // }
+  componentWillUnmount() {
+    this.unsubscribeFromAuth();
+  }
 
   render() {
     console.log(this.props.currentUser);
@@ -34,6 +36,7 @@ class App extends React.Component {
 
         <Switch>
           <Route exact path="/" component={HomePage} />
+          <Route exact path="/profile" component={Profile} />
           <Route
             exact
             path="/auth/signup"
