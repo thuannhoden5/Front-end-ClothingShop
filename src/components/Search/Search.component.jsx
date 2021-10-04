@@ -21,11 +21,19 @@ const Search = () => {
   const handleChangePrice = async (event) => {
     console.log("hello");
     console.log(event.target.value);
+    let a = event.target.value.split("-");
+    console.log(a);
     event.preventDefault();
     setLoading(true);
+
     const result = await axiosInstance.get(
-      `/product/findAllProductByFilter?fromPrice=${1}&toPrice=${1}`
+      `/product/findAllProductByFilter?fromPrice=&toPrice=${
+        a[1] * 1
+      }&category[0]=paint&category[1]=shirtcategory[0]=accessory`
     );
+    if (result.data.success) {
+      setProduct(result.data.data);
+    }
     console.log(result);
   };
   console.log(product);
@@ -36,7 +44,6 @@ const Search = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     setLoading(true);
-    console.log("tru");
   };
 
   return (
@@ -60,7 +67,7 @@ const Search = () => {
               value="0-10"
               onChange={handleChangePrice}
             />
-            <label for="price">0$ - 10$</label>
+            <label for="price">10$ - 20$</label>
           </div>
           <div>
             <input
@@ -69,7 +76,7 @@ const Search = () => {
               value="0-10"
               onChange={handleChangePrice}
             />
-            <label for="price">0$ - 10$</label>
+            <label for="price">20$ - 30$</label>
           </div>
           <div>
             <input
@@ -78,7 +85,7 @@ const Search = () => {
               value="0-10"
               onChange={handleChangePrice}
             />
-            <label for="price">0$ - 10$</label>
+            <label for="price">30$ - 50$</label>
           </div>
         </div>
       </div>
