@@ -56,10 +56,10 @@ const SignUp = () => {
       if (res.data.success) {
         setIsSucceeded(true);
       } else {
-        setErr(res.message);
+        setErr(res.data.message);
       }
     } catch (err) {
-      setErr("Cannot create a new account");
+      // setErr("Cannot create a new account");
       console.log(err);
     }
   };
