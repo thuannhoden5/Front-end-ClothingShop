@@ -39,9 +39,16 @@
   justify-content: space-between;
 }
 .checkbox {
-  width: 30%;
+  width: 50%;
+  height: 100%;
 }
-
+.items {
+  display: flex;
+  flex-wrap: wrap;
+  .item {
+    margin: 10px 20px;
+  }
+}
 // Center & dribbble
 // body {
 //   min-height: 100vh;

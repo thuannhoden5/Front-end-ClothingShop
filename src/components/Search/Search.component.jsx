@@ -32,11 +32,9 @@ const Search = () => {
       }&category[0]=paint&category[1]=shirtcategory[0]=accessory`
     );
     if (result.data.success) {
-      setProduct(result.data.data);
+      // setProduct(result.data.data);
     }
-    console.log(result);
   };
-  console.log(product);
 
   useEffect(() => {
     console.log(product);
@@ -91,12 +89,14 @@ const Search = () => {
       </div>
       {loading ? (
         <div className="body-container">
-          <h1>Result for `{q}`</h1>
-          {product.map((item) => (
-            <div className="item" key={item.id}>
-              <CollectionItem item={item} key={item.id} />
-            </div>
-          ))}
+          <h1 className="result">Result for `{q}`</h1>
+          <div className="items">
+            {data.map((item) => (
+              <div className="item" key={item.id}>
+                <CollectionItem item={item} key={item.id} />
+              </div>
+            ))}
+          </div>
         </div>
       ) : (
         ""
