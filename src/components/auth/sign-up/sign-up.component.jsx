@@ -1,23 +1,24 @@
-import React, { useState } from "react";
-// import Loading from "../share/loading/Loading.component";
-import { Container, SignUpContainer } from "./sign-up.styles";
-import axios from "../../../utils/axios";
-import CustomButton from "../../custom-button/custom-button.component";
-import FormInput from "../../form-input/form-input.component";
-import { ContainerImage } from "./sign-up.styles";
+import React, { useState } from 'react';
+import { Container, SignUpContainer } from './sign-up.styles';
+import axiosInstance from '../../../utils/axios';
+import CustomButton from '../../custom-button/custom-button.component';
+import FormInput from '../../form-input/form-input.component';
+import { ContainerImage } from './sign-up.styles';
+import { setCurrentUser } from '../../../redux/user/user.actions';
+import { useDispatch } from 'react-redux';
 
-const SignUp = () => {
+const SignUp = (props) => {
   const [values, setValues] = useState({
-    email: "",
-    password: "",
-    password: "",
-    confirmPassword: "",
-    address: "",
-    phoneNumber: "",
+    email: '',
+    password: '',
+    confirmPassword: '',
+    address: '',
+    phoneNumber: '',
+    role: 'buyers',
   });
+  const dispatch = useDispatch();
   const [err, setErr] = useState(null);
   const [isSucceeded, setIsSucceeded] = useState(false);
-  // const [loading, setLoading] = useState(false);
   const handleChange = (event) => {
     setValues({
       ...values,
@@ -26,36 +27,30 @@ const SignUp = () => {
   };
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setErr(false);
-    // setLoading(true);
-    if (values.confirmPassword !== values.password) {
-      setErr("Password not matched");
-      return;
-    }
-    if (!values.email) {
-      setErr("Email cannot be empty");
-      return;
-    }
-    if (!values.password) {
-      setErr("Password cannot be empty");
-      return;
-    }
-    if (!values.address) {
-      setErr("Address cannot be empty");
-      return;
-    }
-    if (!values.phoneNumber) {
-      setErr("Phone Number cannot be empty");
-      return;
-    }
-    try {
-      await axios.post("/user/register", values);
+    setErr(null);
+    setIsSucceeded(false);
+    const response = await axiosInstance.post('/user/register', values);
+
+    console.log('res here', response);
+
+    if (response.success) {
       setIsSucceeded(true);
-    } catch (err) {
-      setErr(err.message);
-    } finally {
-      // setLoading(false);
+      localStorage.setItem('token', response.data.token);
+      setTimeout(() => {
+        dispatch(setCurrentUser(response.data.user));
+      }, 2000);
+    } else {
+      setErr(response.message);
     }
+  };
+
+  const renderErrorMessage = (errs) => {
+    if (typeof errs === 'string') {
+      return <div> {errs} </div>;
+    }
+    return errs.map((err) => {
+      return <div> {err} </div>;
+    });
   };
 
   return (
@@ -66,7 +61,7 @@ const SignUp = () => {
 
         {err && (
           <div class="alert alert-danger" role="alert">
-            {err}
+            {renderErrorMessage(err)}
           </div>
         )}
         {isSucceeded && (
@@ -93,12 +88,6 @@ const SignUp = () => {
             type="password"
             handleChange={handleChange}
             label="Confirm Password"
-          />
-          <FormInput
-            name="address"
-            type="text"
-            handleChange={handleChange}
-            label="Address"
           />
           <FormInput
             name="phoneNumber"
