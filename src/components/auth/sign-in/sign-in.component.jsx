@@ -36,7 +36,7 @@ const SignIn = (props) => {
       setErr("Email & password cannot be empty");
       return;
     }
-
+    console.log(values);
     axiosInstance
       .post("/user/login", values)
       .then((res) => {

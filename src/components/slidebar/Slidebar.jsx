@@ -33,21 +33,18 @@ const Slidebar = () => {
         </div>
         <div className="carousel-inner">
           <div className="carousel-item active" data-bs-interval="10000">
-            <img
-              src="https://images.unsplash.com/photo-1607083206325-caf1edba7a0f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2556&q=80"
-              alt=""
-            />
+            <img src="slide2.png" alt="" />
           </div>
           <div className="carousel-item " data-bs-interval="2000">
             <img
-              src="https://images.unsplash.com/photo-1540221652346-e5dd6b50f3e7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1349&q=80"
+              src="slide1.jpeg"
               alt=""
             />
           </div>
           <div className="carousel-item" data-bs-interval="10000">
             <div className="image-container">
               <img
-                src="https://images.unsplash.com/photo-1619166719123-471cee9ce91e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                src="slide3.jpeg"
                 alt=""
               />
             </div>
