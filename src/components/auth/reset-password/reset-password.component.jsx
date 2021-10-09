@@ -1,22 +1,31 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import CustomButton from "../../custom-button/custom-button.component";
-import FormInput from "../../form-input/form-input.component";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import axiosInstance from '../../../utils/axios';
+import CustomButton from '../../custom-button/custom-button.component';
+import FormInput from '../../form-input/form-input.component';
 import {
   Container,
   FooterContainer,
   MainContainer,
   ResetContainer,
-} from "./reset-password.styles";
+} from './reset-password.styles';
 const ResetPassword = () => {
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState('');
+  const [isFound, setIsFound] = useState(false);
   const handleChange = (event) => {
     setEmail(event.target.value);
+  };
+
+  const handleClickSearch = async (event) => {
+    const response = await axiosInstance.post('/user/sendNewPasswordToEmail', {
+      email,
+    });
+    console.log('response here', response);
   };
   return (
     <Container>
       <ResetContainer>
-        <div style={{ fontSize: 20, fontWeight: "bold" }}>
+        <div style={{ fontSize: 20, fontWeight: 'bold' }}>
           Find Your Account
         </div>
         <hr />
@@ -33,10 +42,17 @@ const ResetPassword = () => {
         <hr />
         <FooterContainer>
           <form>
-            <CustomButton color="grey">
-              <Link to="/">Cancel</Link>
+            <CustomButton>
+              <Link to="/auth/signin">Sign In</Link>
             </CustomButton>
-            <CustomButton color="blue">Search</CustomButton>
+            <div
+              onClick={() => {
+                handleClickSearch();
+              }}
+              color="blue"
+            >
+              Search
+            </div>
           </form>
         </FooterContainer>
       </ResetContainer>

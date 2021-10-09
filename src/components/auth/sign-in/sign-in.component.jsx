@@ -1,24 +1,25 @@
-import React, { useState } from "react";
-import CustomButton from "../../custom-button/custom-button.component";
-import FormInput from "../../form-input/form-input.component";
-import { Container } from "./sign-in.styles";
-import Loading from "../../share/loading/Loading.component";
-import { SignInContainer, LinkContainer, Footer } from "./sign-in.styles";
-import axios from "../../../utils/axios";
-import { Link } from "react-router-dom";
-import ResetPassword from "../reset-password/reset-password.component";
-import { connect } from "react-redux";
-import { setCurrentUser } from "../../../redux/user/user.actions";
-import { selectCurrentUser } from "../../../redux/user/user.selectors";
+import React, { useState } from 'react';
+import CustomButton from '../../custom-button/custom-button.component';
+import FormInput from '../../form-input/form-input.component';
+import { Container } from './sign-in.styles';
+import { SignInContainer, LinkContainer, Footer } from './sign-in.styles';
+import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { setCurrentUser } from '../../../redux/user/user.actions';
+import { renderErrorMessage } from '../../../utils/helpers';
+import axiosInstance from '../../../utils/axios';
+import { Redirect } from 'react-router-dom';
+
 // import axios from "axios";
 
 const SignIn = (props) => {
-  console.log(props);
   const [values, setValues] = useState({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
+    role: 'buyers',
   });
-  const [err, setErr] = useState("");
+  const dispatch = useDispatch();
+  const [err, setErr] = useState('');
   const [isSucceeded, setIsSucceeded] = useState(false);
   // const [loading, setLoading] = useState(false);
   const handleChange = (event) => {
@@ -32,20 +33,18 @@ const SignIn = (props) => {
     event.preventDefault();
     setErr(false);
     // setLoading(true);
-    if (!values.email || !values.password) {
-      setErr("Email & password cannot be empty");
-      return;
-    }
-    try {
-      const res = await axios.post("/user/login", values);
-      props.setCurrentUser(res.data.data.user);
-      console.log(res.data.data.user);
-      localStorage.setItem("token", res.data.data.token);
-    } catch (err) {
-      setErr(err.message);
-    } finally {
-      // console.log(loading);
-      // setLoading(false);
+    const response = await axiosInstance.post('/user/login', values);
+
+    if (response.success) {
+      setIsSucceeded(true);
+
+      localStorage.setItem('token', response.data.token);
+
+      setTimeout(() => {
+        dispatch(setCurrentUser(response.data.user));
+      }, 1500);
+    } else {
+      setErr(response.message);
     }
   };
   return (
@@ -55,7 +54,12 @@ const SignIn = (props) => {
         <span>Sign In with email and password</span>
         {err && (
           <div class="alert alert-danger" role="alert">
-            {err}
+            {renderErrorMessage(err)}
+          </div>
+        )}
+        {isSucceeded && (
+          <div class="alert alert-success" role="alert">
+            Sign in successfully
           </div>
         )}
         <form onSubmit={handleSubmit} className="novalidate">
@@ -101,16 +105,5 @@ const SignIn = (props) => {
     </Container>
   );
 };
-const mapStateToProps = (state) => {
-  return {
-    currentUser: selectCurrentUser(state),
-  };
-};
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    setCurrentUser: (user) => dispatch(setCurrentUser(user)),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
+export default SignIn;

@@ -6,6 +6,7 @@ import FormInput from '../../form-input/form-input.component';
 import { ContainerImage } from './sign-up.styles';
 import { setCurrentUser } from '../../../redux/user/user.actions';
 import { useDispatch } from 'react-redux';
+import { renderErrorMessage } from '../../../utils/helpers';
 
 const SignUp = (props) => {
   const [values, setValues] = useState({
@@ -38,19 +39,10 @@ const SignUp = (props) => {
       localStorage.setItem('token', response.data.token);
       setTimeout(() => {
         dispatch(setCurrentUser(response.data.user));
-      }, 2000);
+      }, 1500);
     } else {
       setErr(response.message);
     }
-  };
-
-  const renderErrorMessage = (errs) => {
-    if (typeof errs === 'string') {
-      return <div> {errs} </div>;
-    }
-    return errs.map((err) => {
-      return <div> {err} </div>;
-    });
   };
 
   return (
