@@ -15,8 +15,8 @@ const CustomNavbar = ({ currentUser, setCurrentUser, ...props }) => {
   // console.log("toggle cart props", props);
   // console.log(history)
   const handleClick = () => {
-    console.log('run here');
     setCurrentUser(null);
+    localStorage.removeItem('token');
   };
   return (
     <div className="header">
@@ -36,7 +36,6 @@ const CustomNavbar = ({ currentUser, setCurrentUser, ...props }) => {
             className="option"
             onClick={() => {
               handleClick();
-              localStorage.removeItem("token");
             }}
           >
             SIGN OUT
