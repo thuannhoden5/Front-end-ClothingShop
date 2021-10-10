@@ -32,8 +32,6 @@ const SignUp = (props) => {
     setIsSucceeded(false);
     const response = await axiosInstance.post('/user/register', values);
 
-    console.log('res here', response);
-
     if (response.success) {
       setIsSucceeded(true);
       localStorage.setItem('token', response.data.token);

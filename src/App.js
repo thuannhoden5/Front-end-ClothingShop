@@ -1,9 +1,6 @@
 import CustomNavbar from "./components/Navbar/Navbar";
 import HomePage from "./components/Homepage/HomePage.component";
-// import Navbar from './Components/Navbar/Navbar.component'
-// import Shop from './Components/Shop/Shop.component'
-// import Onboarding from './Components/Onboarding/Onboarding.component'
-// import CheckoutPage from './Components/Checkout/Checkout.component'
+import Shop from "./components/Shop/Shop.component";
 import { Route, Switch, Redirect } from "react-router-dom";
 import React from "react";
 import "./App.css";
@@ -14,6 +11,9 @@ import SignIn from "./components/auth/sign-in/sign-in.component";
 import SignUp from "./components/auth/sign-up/sign-up.component";
 import ResetPassword from "./components/auth/reset-password/reset-password.component";
 import Checkout from "./components/checkout/Checkout.component";
+import Search from "./components/Search/Search.component";
+import Profile from "./components/profile/Profile.component";
+import Article from "./components/article/Article.component";
 class App extends React.Component {
   unsubscribeFromAuth = null;
 
@@ -35,6 +35,7 @@ class App extends React.Component {
 
         <Switch>
           <Route exact path="/" component={HomePage} />
+          <Route exact path="/profile" component={Profile} />
           <Route
             exact
             path="/auth/signup"
@@ -51,6 +52,8 @@ class App extends React.Component {
           />
           <Route exact path="/auth/resetpassword" component={ResetPassword} />
           <Route exact path="/checkout" component={Checkout} />
+          <Route path="/shop" component={Shop} />
+          <Route path="/search" component={Search} />
         </Switch>
       </div>
     );
