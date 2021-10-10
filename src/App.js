@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import CustomNavbar from "./components/Navbar/Navbar";
 import HomePage from "./components/Homepage/HomePage.component";
 // import Navbar from './Components/Navbar/Navbar.component'

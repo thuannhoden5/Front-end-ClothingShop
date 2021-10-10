@@ -1,26 +1,34 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import axiosInstance from '../../../utils/axios';
 import CustomButton from '../../custom-button/custom-button.component';
 import FormInput from '../../form-input/form-input.component';
+import axiosInstance from '../../../utils/axios';
 import {
   Container,
   FooterContainer,
   MainContainer,
   ResetContainer,
 } from './reset-password.styles';
+import { renderErrorMessage } from '../../../utils/helpers';
 const ResetPassword = () => {
   const [email, setEmail] = useState('');
-  const [isFound, setIsFound] = useState(false);
+  const [err, setErr] = useState('');
+  const [isSucceeded, setIsSucceeded] = useState(false);
   const handleChange = (event) => {
     setEmail(event.target.value);
   };
-
-  const handleClickSearch = async (event) => {
-    const response = await axiosInstance.post('/user/sendNewPasswordToEmail', {
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setErr(false);
+    const res = await axiosInstance.post('/user/sendNewPasswordToEmail', {
       email,
     });
-    console.log('response here', response);
+    console.log(res);
+    if (res.success) {
+      setIsSucceeded(true);
+    } else {
+      setErr(res.message);
+    }
   };
   return (
     <Container>
@@ -28,6 +36,16 @@ const ResetPassword = () => {
         <div style={{ fontSize: 20, fontWeight: 'bold' }}>
           Find Your Account
         </div>
+        {err && (
+          <div class="alert alert-danger" role="alert">
+            {renderErrorMessage(err)}
+          </div>
+        )}
+        {isSucceeded && (
+          <div class="alert alert-success" role="alert">
+            Check your mail to receive new password
+          </div>
+        )}
         <hr />
         <MainContainer>
           <FormInput
@@ -41,18 +59,11 @@ const ResetPassword = () => {
 
         <hr />
         <FooterContainer>
-          <form>
-            <CustomButton>
-              <Link to="/auth/signin">Sign In</Link>
+          <form onSubmit={handleSubmit}>
+            <CustomButton color="grey">
+              <Link to="/">Cancel</Link>
             </CustomButton>
-            <div
-              onClick={() => {
-                handleClickSearch();
-              }}
-              color="blue"
-            >
-              Search
-            </div>
+            <CustomButton color="blue">Search</CustomButton>
           </form>
         </FooterContainer>
       </ResetContainer>
