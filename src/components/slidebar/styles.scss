@@ -1,13 +1,43 @@
 img {
   width: 100%;
-  height: 60vh;
+  height: 65vh;
   background-size: cover;
   background-position: center;
 }
 .container-slide {
   width: 100%;
   // padding: 20px;
-  height: 60vh;
+  height: 65vh;
   margin-bottom: 60px;
   padding: 50px 20px 20px 20px;
+}
+@media only screen and (max-width: 750px) {
+  img {
+    width: 100%;
+    height: 50vh;
+    background-size: cover;
+    background-position: center;
+  }
+  .container-slide {
+    width: 100%;
+    // padding: 20px;
+    height: 50vh;
+    margin-bottom: 60px;
+    padding: 50px 20px 20px 20px;
+  }
+}
+@media only screen and (min-width: 960px) {
+  img {
+    width: 100%;
+    height: 70vh;
+    background-size: cover;
+    background-position: center;
+  }
+  .container-slide {
+    width: 100%;
+    // padding: 20px;
+    height: 70vh;
+    margin-bottom: 60px;
+    padding: 50px 20px 20px 20px;
+  }
 }
