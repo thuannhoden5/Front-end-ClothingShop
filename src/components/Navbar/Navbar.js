@@ -1,14 +1,14 @@
-import React from "react";
-import CartDropdown from "../CartDropdown/CartDropdown.component";
-import CartIcon from "../CartIcon/CartIcon.component.jsx";
-import { ReactComponent as Logo } from "../../assets/crown.svg";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import "./Navbar.styles.scss";
-import { createStructuredSelector } from "reselect";
-import { selectCartHidden } from "../../redux/cart/cart.selectors";
-import { selectCurrentUser } from "../../redux/user/user.selectors";
-import { setCurrentUser } from "../../redux/user/user.actions";
+import React from 'react';
+import CartDropdown from '../CartDropdown/CartDropdown.component';
+import CartIcon from '../CartIcon/CartIcon.component.jsx';
+import { ReactComponent as Logo } from '../../assets/crown.svg';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import './Navbar.styles.scss';
+import { createStructuredSelector } from 'reselect';
+import { selectCartHidden } from '../../redux/cart/cart.selectors';
+import { selectCurrentUser } from '../../redux/user/user.selectors';
+import { setCurrentUser } from '../../redux/user/user.actions';
 // import {h}
 
 const CustomNavbar = ({ currentUser, setCurrentUser, ...props }) => {
@@ -16,14 +16,15 @@ const CustomNavbar = ({ currentUser, setCurrentUser, ...props }) => {
   // console.log(history)
   const handleClick = () => {
     setCurrentUser(null);
+    localStorage.removeItem('token');
   };
   return (
     <div className="header">
-      <Link className="logo-container" to="/">
+      {/* <Link className="logo-container" to="/">
         <Logo className="logo" />
-      </Link>
+      </Link> */}
       <div className="options">
-        <Link className="option" to="/shop">
+        <Link className="option" to="">
           SHOP
         </Link>
         <Link className="option" to="/contact">
@@ -33,10 +34,8 @@ const CustomNavbar = ({ currentUser, setCurrentUser, ...props }) => {
         {currentUser ? (
           <div
             className="option"
-            to="/shop"
             onClick={() => {
               handleClick();
-              localStorage.removeItem("token");
             }}
           >
             SIGN OUT
