@@ -1,17 +1,18 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import CustomButton from "../../custom-button/custom-button.component";
-import FormInput from "../../form-input/form-input.component";
-import axiosInstance from "../../../utils/axios";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import CustomButton from '../../custom-button/custom-button.component';
+import FormInput from '../../form-input/form-input.component';
+import axiosInstance from '../../../utils/axios';
 import {
   Container,
   FooterContainer,
   MainContainer,
   ResetContainer,
-} from "./reset-password.styles";
+} from './reset-password.styles';
+import { renderErrorMessage } from '../../../utils/helpers';
 const ResetPassword = () => {
-  const [email, setEmail] = useState("");
-  const [err, setErr] = useState("");
+  const [email, setEmail] = useState('');
+  const [err, setErr] = useState('');
   const [isSucceeded, setIsSucceeded] = useState(false);
   const handleChange = (event) => {
     setEmail(event.target.value);
@@ -19,29 +20,25 @@ const ResetPassword = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     setErr(false);
-    try {
-      const res = await axiosInstance.post("/user/sendNewPasswordToEmail", {
-        email: email,
-      });
-      console.log(res);
-      if (res.data.success) {
-        setIsSucceeded(true);
-      } else {
-        setErr(res.data.message);
-      }
-    } catch (err) {
-      console.log(err.message);
+    const res = await axiosInstance.post('/user/sendNewPasswordToEmail', {
+      email,
+    });
+    console.log(res);
+    if (res.success) {
+      setIsSucceeded(true);
+    } else {
+      setErr(res.message);
     }
   };
   return (
     <Container>
       <ResetContainer>
-        <div style={{ fontSize: 20, fontWeight: "bold" }}>
+        <div style={{ fontSize: 20, fontWeight: 'bold' }}>
           Find Your Account
         </div>
         {err && (
           <div class="alert alert-danger" role="alert">
-            {err}
+            {renderErrorMessage(err)}
           </div>
         )}
         {isSucceeded && (
