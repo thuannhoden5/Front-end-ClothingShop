@@ -14,6 +14,8 @@ import Checkout from "./components/checkout/Checkout.component";
 import Search from "./components/Search/Search.component";
 import Profile from "./components/profile/Profile.component";
 import Article from "./components/article/Article.component";
+import CheckoutPage from "./components/checkout/checkoutpage.component";
+import Contact from "./components/contact/Contact.component";
 class App extends React.Component {
   unsubscribeFromAuth = null;
 
@@ -30,8 +32,10 @@ class App extends React.Component {
   render() {
     console.log(this.props.currentUser);
     return (
-      <div>
-        <CustomNavbar />
+      <div className="d-flex flex-column vh-100">
+        <div className=" ">
+          <CustomNavbar />
+        </div>
 
         <Switch>
           <Route exact path="/" component={HomePage} />
@@ -50,11 +54,20 @@ class App extends React.Component {
               this.props.currentUser ? <Redirect to="/" /> : <SignIn />
             }
           />
+          <Route exact path="/checkoutpage" component={CheckoutPage} />
           <Route exact path="/auth/resetpassword" component={ResetPassword} />
-          <Route exact path="/checkout" component={Checkout} />
+          <Route exact path="/checkout" component={CheckoutPage} />
           <Route path="/shop" component={Shop} />
           <Route path="/search" component={Search} />
         </Switch>
+
+        {/* <div className="h-10 mg-10">
+          <footer className="footer bg-light  py-1 mb-0 ">
+            <div className="container">
+              <span className="text-muted"> &copy; YelpCamp 2020</span>
+            </div>
+          </footer>
+        </div> */}
       </div>
     );
   }
