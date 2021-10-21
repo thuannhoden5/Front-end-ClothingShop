@@ -1,20 +1,33 @@
 import axios from 'axios';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { selectedProducts } from '../../redux/shop/shop.actions';
 import axiosInstance from '../../utils/axios';
-import CustomButton from '../custom-button/custom-button.component';
+import {
+  CustomButton,
+  CustomSmallButton,
+} from '../custom-button/custom-button.component';
 import './ProductDetail.scss';
 
 const ProductDetail = () => {
   const { id } = useParams();
-  console.log('id', id);
+  const buyNow = () => {
+    
+  };
+  const addToCart = () => {
+    
+  };
+  const handleChangeQuantity = (event) => {
+    if (event.target.value === '+') {
+      setQuantity(quantity + 1);
+    } else {
+      setQuantity(quantity - 1);
+    }
+  };
+  const [quantity, setQuantity] = useState(0);
   const dispatch = useDispatch();
   const productDetail = useSelector((state) => state.products.selectedProduct);
-
-  console.log('productDetail', productDetail);
-
   useEffect(() => {
     const fetchProductDetail = async (id) => {
       try {
@@ -39,13 +52,36 @@ const ProductDetail = () => {
         <div className="product-price">{productDetail.price}.000 VND</div>
         <div className="product-cart-button">
           <div className="quantity-product">
-            <CustomButton color="green">+</CustomButton>
-            <span> 2 </span>
-            <CustomButton color="green">-</CustomButton>
+            {quantity === 0 && (
+              <CustomSmallButton value={'-'} color="grey">
+                -
+              </CustomSmallButton>
+            )}
+            {quantity !== 0 && (
+              <CustomSmallButton
+                value={'-'}
+                onClick={handleChangeQuantity}
+                color="green"
+              >
+                -
+              </CustomSmallButton>
+            )}
+            <span> {quantity} </span>
+            <CustomSmallButton
+              value={'+'}
+              onClick={handleChangeQuantity}
+              color="green"
+            >
+              +
+            </CustomSmallButton>
           </div>
           <div className="handle-cart">
-            <CustomButton color="green"> Buy Now</CustomButton>
-            <CustomButton color="blue"> Add To Cart</CustomButton>
+            <CustomButton onClick={addToCart} color="green">
+              Add To Cart
+            </CustomButton>
+            <CustomButton onClick={buyNow} color="blue">
+              Buy Now
+            </CustomButton>
           </div>
         </div>
       </div>

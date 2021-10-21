@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import CustomButton from "../custom-button/custom-button.component";
+import { CustomButton } from '../custom-button/custom-button.component';
 import FormInput from "../form-input/form-input.component";
 import "./Profile.styles.scss";
 import { selectCurrentUser } from "../../redux/user/user.selectors";

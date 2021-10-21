@@ -1,9 +1,22 @@
 .button {
-  margin-top: calc(5%);
+  // margin-top: calc(5%);
+  // height: 46px;
   border: none;
   background-color: black;
   color: white;
   padding: 10px 28px;
+  font-size: 22px;
+  cursor: pointer;
+  border-radius: 15px;
+  font-weight: bold;
+  justify-content: center;
+}
+.small-button {
+  border: none;
+  background-color: black;
+  color: white;
+  width: 46px;
+  height: 48px;
   font-size: 22px;
   cursor: pointer;
   border-radius: 15px;
@@ -29,6 +42,6 @@
   }
 }
 .grey {
-  background-color: #e3e6ea;
-  margin: 0 10px;
+  background-color: #d0d2d4;
+  cursor: no-drop !important;
 }

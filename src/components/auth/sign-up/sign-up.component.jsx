@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Container, SignUpContainer } from './sign-up.styles';
 import axiosInstance from '../../../utils/axios';
-import CustomButton from '../../custom-button/custom-button.component';
+import { CustomButton } from '../../custom-button/custom-button.component';
 import FormInput from '../../form-input/form-input.component';
 import { ContainerImage } from './sign-up.styles';
 import { setCurrentUser } from '../../../redux/user/user.actions';

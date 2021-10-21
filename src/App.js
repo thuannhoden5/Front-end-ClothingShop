@@ -6,11 +6,11 @@ import './App.css';
 import SignIn from './components/auth/sign-in/sign-in.component';
 import SignUp from './components/auth/sign-up/sign-up.component';
 import ResetPassword from './components/auth/reset-password/reset-password.component';
-import Checkout from './components/checkout/Checkout.component';
 import Search from './components/Search/Search.component';
 import Profile from './components/profile/Profile.component';
 import Shop from './components/Shop/Shop.component';
 import ProductDetail from './components/ProductDetail/ProductDetail';
+import CheckoutPage from './components/checkout/checkoutpage.component'
 function App() {
   return (
     <div>
@@ -21,7 +21,7 @@ function App() {
         <Route path="/product/:id" component={ProductDetail} />
         <Route exact path="/profile" component={Profile} />
         <Route exact path="/checkout" component={CheckoutPage} />
-        <Rou  te
+        <Route
           exact
           path="/auth/signup"
           render={() =>
@@ -36,7 +36,6 @@ function App() {
           }
         />
         <Route exact path="/auth/resetpassword" component={ResetPassword} />
-        <Route exact path="/checkout" component={Checkout} />
         <Route path="/search" component={Search} />
       </Switch>
     </div>

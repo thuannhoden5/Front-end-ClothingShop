@@ -9,7 +9,6 @@ import { createStructuredSelector } from "reselect";
 import { selectCartHidden } from "../../redux/cart/cart.selectors";
 import { selectCurrentUser } from "../../redux/user/user.selectors";
 import { setCurrentUser } from "../../redux/user/user.actions";
-// import {h}
 
 const CustomNavbar = ({ currentUser, setCurrentUser, ...props }) => {
   // console.log("toggle cart props", props);

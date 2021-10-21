@@ -2,7 +2,6 @@ import React from "react";
 import "./Search.styles.scss";
 import { useState, useEffect } from "react";
 import CollectionItem from "../CollectionItem/Collectiontem.component";
-import CustomButton from "../custom-button/custom-button.component";
 import axiosInstance from "../../utils/axios";
 const Search = () => {
   const data = [

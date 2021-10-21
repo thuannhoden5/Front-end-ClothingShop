@@ -1,5 +1,5 @@
-import React from "react";
-import "./custom-button.styles.scss";
+import React from 'react';
+import './custom-button.styles.scss';
 const CustomButton = ({ children, color, ...otherProps }) => {
   return (
     <button className={`button ${color}`} {...otherProps}>
@@ -7,4 +7,11 @@ const CustomButton = ({ children, color, ...otherProps }) => {
     </button>
   );
 };
-export default CustomButton;
+const CustomSmallButton = ({ children, color, ...otherProps }) => {
+  return (
+    <button className={`small-button ${color}`} {...otherProps}>
+      {children}
+    </button>
+  );
+};
+export { CustomSmallButton, CustomButton };

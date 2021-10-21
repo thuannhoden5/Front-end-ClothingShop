@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import CustomButton from '../../custom-button/custom-button.component';
+import { CustomButton } from '../../custom-button/custom-button.component';
 import FormInput from '../../form-input/form-input.component';
 import { Container } from './sign-in.styles';
 import { SignInContainer, LinkContainer, Footer } from './sign-in.styles';
