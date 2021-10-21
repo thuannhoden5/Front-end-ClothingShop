@@ -1,18 +1,36 @@
-import React from 'react'
-import CollectionsOverview from '../CollectionsOverview/CollectionsOverview.component'
-import Collection from '../Collection/Collection.component'
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { setProducts } from '../../redux/shop/shop.actions';
+import axiosInstance from '../../utils/axios';
+import ProductListing from '../ProductListing/ProductListing';
 
-import { Route } from 'react-router-dom'
+const Shop = () => {
+  const param = useParams();
+  console.log('param here', param);
+  const directory = param.directory ? param.directory : '';
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const response = await axiosInstance.get(
+          `/product/findAllProductByFilter?category=${directory}`,
+        );
+        console.log('product here', response);
+        dispatch(setProducts(response.data));
+      } catch (err) {
+        console.log('error here', err);
+      }
+    };
 
-
-const Shop = ({ match }) => {
-  // console.log()
+    fetchProduct();
+  }, []);
   return (
     <div className="shop-page">
-      <Route exact path={`${match.path}`} component={CollectionsOverview}/>
-      <Route path={`${match.path}/:collectionId`} component={Collection} />
+      <ProductListing></ProductListing>
+      <div></div>
     </div>
-  )
-}
+  );
+};
 
-export default Shop
+export default Shop;

@@ -5,10 +5,14 @@ import CustomButton from '../../custom-button/custom-button.component';
 import FormInput from '../../form-input/form-input.component';
 import { ContainerImage } from './sign-up.styles';
 import { setCurrentUser } from '../../../redux/user/user.actions';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { renderErrorMessage } from '../../../utils/helpers';
 
-const SignUp = (props) => {
+const SignUp = () => {
+  const currentUser = useSelector((state) => state.currentUser);
+
+  console.log('currentUser', currentUser);
+
   const [values, setValues] = useState({
     email: '',
     password: '',
@@ -31,6 +35,7 @@ const SignUp = (props) => {
     setErr(null);
     setIsSucceeded(false);
     const response = await axiosInstance.post('/user/register', values);
+    console.log('response here', response);
 
     if (response.success) {
       setIsSucceeded(true);

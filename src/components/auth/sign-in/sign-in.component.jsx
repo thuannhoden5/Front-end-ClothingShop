@@ -12,7 +12,7 @@ import { Redirect } from 'react-router-dom';
 
 // import axios from "axios";
 
-const SignIn = (props) => {
+const SignIn = ({ currentUser }) => {
   const [values, setValues] = useState({
     email: '',
     password: '',
@@ -29,6 +29,7 @@ const SignIn = (props) => {
       [name]: value,
     });
   };
+  if (currentUser) return <Redirect to="/" />;
   const handleSubmit = async (event) => {
     event.preventDefault();
     setErr(false);
