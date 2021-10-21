@@ -20,7 +20,8 @@ function App() {
         <Route path="/shop/:directory" component={Shop} />
         <Route path="/product/:id" component={ProductDetail} />
         <Route exact path="/profile" component={Profile} />
-        <Route
+        <Route exact path="/checkout" component={CheckoutPage} />
+        <Rou  te
           exact
           path="/auth/signup"
           render={() =>

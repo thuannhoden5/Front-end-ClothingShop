@@ -3,11 +3,11 @@ import "./checkout-item.styles.scss";
 
 import { connect } from "react-redux";
 import {
-  addCartItems,
+  addItem,
   clearItemFromCart,
   removeItem,
 } from "../../../redux/cart/cart.actions";
-const CheckoutItem = ({ cartItem, clearItem, addCartItems, removeItem }) => {
+const CheckoutItem = ({ cartItem, clearItem, addItem, removeItem }) => {
   const { name, imageUrl, price, quantity } = cartItem;
   return (
     <div className="checkout-item">
@@ -28,7 +28,7 @@ const CheckoutItem = ({ cartItem, clearItem, addCartItems, removeItem }) => {
         <div
           className="arrow"
           onClick={() => {
-            addCartItems(cartItem);
+            addItem(cartItem);
           }}
         >
           &#10095;
@@ -49,7 +49,7 @@ const CheckoutItem = ({ cartItem, clearItem, addCartItems, removeItem }) => {
 
 const mapDispatchToProps = (dispatch) => ({
   clearItem: (item) => dispatch(clearItemFromCart(item)),
-  addCartItems: (item) => dispatch(addCartItems(item)),
+  addItem: (item) => dispatch(addItem(item)),
   removeItem: (item) => dispatch(removeItem(item)),
 });
 
