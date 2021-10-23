@@ -13,7 +13,7 @@ const Picture = () => {
           backgroundSize: "cover",
         }}
       />
-      <title>thel</title>
+      <h6 className="card-title"></h6>
     </div>
   );
 };
