@@ -5,7 +5,8 @@
   margin-bottom: 15px;
 
   img {
-    width: 30%;
+    width: 90px;
+    height: 80px;
   }
 
   .item-details {
@@ -13,8 +14,8 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    justify-content: center;
-    padding: 10px 20px;
+    justify-content: space-between;
+    padding: 0px 20px;
 
     .name {
       font-size: 16px;

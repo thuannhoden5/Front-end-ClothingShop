@@ -1,15 +1,18 @@
-import React from "react";
-import { Link, Route } from "react-router-dom";
-import { connect } from "react-redux";
-import CartItem from "../CartItem/CartItem.component";
-import { selectCartItems } from "../../redux/cart/cart.selectors";
-import { toggleCartHidden } from "../../redux/cart/cart.actions";
-import { withRouter } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import CartItem from '../CartItem/CartItem.component';
 
 import { CustomButton } from '../custom-button/custom-button.component';
-import "./CartDropdown.styles.scss";
+import './CartDropdown.styles.scss';
+import { useDispatch } from 'react-redux';
+import { toggleCartHidden } from '../../redux/cart/cart.actions';
 
 const CartDropDown = ({ cartItems, ...props }) => {
+  const cartDetail = useSelector((state) => state.cart.cartItems);
+  const dispatch = useDispatch();
+  console.log('cartDetail here', cartDetail);
+
   const EmptyPage = () => {
     return (
       <div className="empty">
@@ -21,38 +24,23 @@ const CartDropDown = ({ cartItems, ...props }) => {
   return (
     <div className="cart-dropdown">
       <div
-        className={`${cartItems.length === 0 ? "empty-cart" : ""} cart-items`}
+        className={`${cartDetail.length === 0 ? 'empty-cart' : ''} cart-items`}
       >
-        {!cartItems.length ? (
+        {!cartDetail.length ? (
           <EmptyPage />
         ) : (
-          cartItems.map((item) => {
-            return <CartItem key={item.id} item={item} />;
+          cartDetail.map((item) => {
+            return <CartItem key={item._id} item={item} />;
           })
         )}
       </div>
-      <Link
-        onClick={props.toggleCartHidden}
-        className="checkout-link"
-        to="/checkout"
-      >
-        <CustomButton>GO TO CHECKOUT</CustomButton>
+      <Link className="checkout-link" to="/checkout">
+        <CustomButton onClick={() => dispatch(toggleCartHidden())}>
+          GO TO CHECKOUT
+        </CustomButton>
       </Link>
     </div>
   );
 };
-const mapStateToProps = (state) => {
-  return {
-    cartItems: selectCartItems(state),
-  };
-};
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    toggleCartHidden: () => dispatch(toggleCartHidden()),
-  };
-};
-
-export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(CartDropDown)
-);
+export default CartDropDown;

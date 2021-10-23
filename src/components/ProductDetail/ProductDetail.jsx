@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
+import { addItem } from '../../redux/cart/cart.actions';
 import { selectedProducts } from '../../redux/shop/shop.actions';
 import axiosInstance from '../../utils/axios';
 import {
@@ -12,22 +13,33 @@ import './ProductDetail.scss';
 
 const ProductDetail = () => {
   const { id } = useParams();
-  const buyNow = () => {
-    
-  };
+  const productDetail = useSelector((state) => state.products.selectedProduct);
+  const cartDetail = useSelector((state) => state.cart.cartItems);
+  const dispatch = useDispatch();
+  const [quantity, setQuantity] = useState(0);
+  const [err, setErr] = useState('');
+  const buyNow = () => {};
+
   const addToCart = () => {
-    
+    if (quantity === 0) {
+      setErr('Please add at least one item');
+      return;
+    }
+    dispatch(addItem({ product: productDetail, quantity: quantity }));
+    console.log('cartDetail here', cartDetail);
   };
+
   const handleChangeQuantity = (event) => {
     if (event.target.value === '+') {
+      if (quantity === 0) {
+        setErr('');
+      }
       setQuantity(quantity + 1);
     } else {
       setQuantity(quantity - 1);
     }
   };
-  const [quantity, setQuantity] = useState(0);
-  const dispatch = useDispatch();
-  const productDetail = useSelector((state) => state.products.selectedProduct);
+
   useEffect(() => {
     const fetchProductDetail = async (id) => {
       try {
@@ -84,6 +96,7 @@ const ProductDetail = () => {
             </CustomButton>
           </div>
         </div>
+        <div className="error">{err}</div>
       </div>
     </div>
   );

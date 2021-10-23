@@ -1,21 +1,22 @@
-import React from "react";
-import CartDropdown from "../CartDropdown/CartDropdown.component";
-import CartIcon from "../CartIcon/CartIcon.component.jsx";
-import { ReactComponent as Logo } from "../../assets/crown.svg";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import "./Navbar.styles.scss";
-import { createStructuredSelector } from "reselect";
-import { selectCartHidden } from "../../redux/cart/cart.selectors";
-import { selectCurrentUser } from "../../redux/user/user.selectors";
-import { setCurrentUser } from "../../redux/user/user.actions";
+import React from 'react';
+import CartDropdown from '../CartDropdown/CartDropdown.component';
+import CartIcon from '../CartIcon/CartIcon.component.jsx';
+import { ReactComponent as Logo } from '../../assets/crown.svg';
+import { connect, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import './Navbar.styles.scss';
+import { createStructuredSelector } from 'reselect';
+import { selectCartHidden } from '../../redux/cart/cart.selectors';
+import { selectCurrentUser } from '../../redux/user/user.selectors';
+import { setCurrentUser } from '../../redux/user/user.actions';
 
 const CustomNavbar = ({ currentUser, setCurrentUser, ...props }) => {
-  // console.log("toggle cart props", props);
-  // console.log(history)
+  const hidden = useSelector((state) => state.cart.hidden);
+  console.log(hidden);
+
   const handleClick = () => {
     setCurrentUser(null);
-    localStorage.removeItem("token");
+    localStorage.removeItem('token');
   };
   return (
     <div className="header">
@@ -46,7 +47,7 @@ const CustomNavbar = ({ currentUser, setCurrentUser, ...props }) => {
         )}
         <CartIcon />
       </div>
-      {!props.hidden && <CartDropdown />}
+      {hidden && <CartDropdown />}
     </div>
   );
 };

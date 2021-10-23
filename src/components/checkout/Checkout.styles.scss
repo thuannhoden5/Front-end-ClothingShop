@@ -1,41 +1,89 @@
 .checkout-page {
-  width: 55%;
+  width: 100%;
   min-height: 90vh;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 0px auto 0;
+  justify-content: center;
+  // margin: 0px auto 0;
 
-  .checkout-header {
-    width: 100%;
-    padding: 100px 0;
+  .section-left {
+    width: 50%;
+    padding: 2% 5%;
+  }
+
+  .section-right {
+    width: 50%;
+    padding: 2% 5%;
+    .list-group-item {
+      border: none;
+    }
+  }
+}
+.jss36 {
+  color: red;
+}
+.product-image {
+  height: 18vh;
+  width: 150px;
+}
+.list-group-item {
+  .cart-items {
     display: flex;
+    flex-grow: 1;
+    flex-direction: column;
     justify-content: space-between;
-    border-bottom: 1px solid darkgrey;
+    height: 14vh;
 
-    .header-block {
-      text-transform: capitalize;
-      width: 23%;
+    .upper-item {
+      display: flex;
+      justify-content: space-between;
+      padding-left: 2%;
+      .close-button {
+        cursor: pointer;
+      }
+    }
 
-      &:last-child {
-        width: 8%;
+    .footer-item {
+      display: flex;
+      justify-content: space-between;
+      .quantity-handle {
+        button {
+          background-color: white;
+          border: none;
+        }
       }
     }
   }
-
-  .total {
-    margin-top: 30px;
-    margin-left: auto;
-    font-size: 36px;
-  }
-  button {
-    margin-left: auto;
-    margin-top: 50px;
-  }
-  .test-warning {
-    text-align: center;
-    margin-top: 40px;
-    font-size: 24px;
-    color: red;
-  }
 }
+
+// .checkout-header {
+//   width: 100%;
+//   padding: 100px 0;
+//   display: flex;
+//   justify-content: space-between;
+//   border-bottom: 1px solid darkgrey;
+
+//   .header-block {
+//     text-transform: capitalize;
+//     width: 23%;
+
+//     &:last-child {
+//       width: 8%;
+//     }
+//   }
+// }
+
+// .total {
+//   margin-top: 30px;
+//   margin-left: auto;
+//   font-size: 36px;
+// }
+// button {
+//   margin-left: auto;
+//   margin-top: 50px;
+// }
+// .test-warning {
+//   text-align: center;
+//   margin-top: 40px;
+//   font-size: 24px;
+//   color: red;
+// }
