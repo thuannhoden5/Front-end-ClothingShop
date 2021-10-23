@@ -16,6 +16,7 @@ import Profile from "./components/profile/Profile.component";
 import Article from "./components/article/Article.component";
 import CheckoutPage from "./components/checkout/checkoutpage.component";
 import Contact from "./components/contact/Contact.component";
+import Picture from "./components/picture/picture.components";
 class App extends React.Component {
   unsubscribeFromAuth = null;
 
@@ -32,7 +33,7 @@ class App extends React.Component {
   render() {
     console.log(this.props.currentUser);
     return (
-      <div className="d-flex flex-column vh-100">
+      <div className="d-flex flex-column ">
         <div className=" ">
           <CustomNavbar />
         </div>
@@ -59,8 +60,10 @@ class App extends React.Component {
           <Route exact path="/checkout" component={CheckoutPage} />
           <Route path="/shop" component={Shop} />
           <Route path="/search" component={Search} />
+          <Route path="/image" component={Picture} />
+          <Picture />
         </Switch>
-
+        <Contact />
         {/* <div className="h-10 mg-10">
           <footer className="footer bg-light  py-1 mb-0 ">
             <div className="container">

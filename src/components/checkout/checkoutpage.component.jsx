@@ -8,9 +8,9 @@ import {
 import { addItem, removeItem } from "../../redux/cart/cart.actions";
 const CheckoutPage = ({ cartItems, total, addItem, removeItem }) => {
   return (
-    <div className="container">
+    <div className="mx-5 my-5">
       <div className="row g-5">
-        <div className="col-md-5 col-lg-4 order-md-last">
+        <div className="col-md-8 col-lg-4 order-md-last">
           <h4 className="d-flex justify-content-between align-items-center mb-3">
             <span className="text-primary">Your cart</span>
             {/* <span className="badge bg-primary rounded-pill">3</span> */}
@@ -40,6 +40,9 @@ const CheckoutPage = ({ cartItems, total, addItem, removeItem }) => {
                       >
                         &#10095;
                       </div>
+                    </span>
+                    <span>
+                      <div>Size: {cartItem.size}</div>
                     </span>
                   </div>
                   <span className="text-muted">${cartItem.price}</span>
@@ -105,25 +108,6 @@ const CheckoutPage = ({ cartItems, total, addItem, removeItem }) => {
               </div>
 
               <div className="col-12">
-                <label for="username" className="form-label">
-                  Username
-                </label>
-                <div className="input-group has-validation">
-                  <span className="input-group-text">@</span>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="username"
-                    placeholder="Username"
-                    required
-                  />
-                  <div className="invalid-feedback">
-                    Your username is required.
-                  </div>
-                </div>
-              </div>
-
-              <div className="col-12">
                 <label for="email" className="form-label">
                   Email <span className="text-muted">(Optional)</span>
                 </label>
@@ -139,14 +123,13 @@ const CheckoutPage = ({ cartItems, total, addItem, removeItem }) => {
               </div>
 
               <div className="col-12">
-                <label for="address" className="form-label">
-                  Address
+                <label for="phoneNumber" className="form-label">
+                  Phone Number
                 </label>
                 <input
                   type="text"
                   className="form-control"
-                  id="address"
-                  placeholder="1234 Main St"
+                  id="phoneNumber"
                   required
                 />
                 <div className="invalid-feedback">
@@ -155,13 +138,13 @@ const CheckoutPage = ({ cartItems, total, addItem, removeItem }) => {
               </div>
 
               <div className="col-12">
-                <label for="address2" className="form-label">
-                  Address 2 <span className="text-muted">(Optional)</span>
+                <label for="address" className="form-label">
+                  Address <span className="text-muted">(Optional)</span>
                 </label>
                 <input
                   type="text"
                   className="form-control"
-                  id="address2"
+                  id="address"
                   placeholder="Apartment or suite"
                 />
               </div>

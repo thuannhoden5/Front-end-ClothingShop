@@ -19,36 +19,62 @@ const CustomNavbar = ({ currentUser, setCurrentUser, ...props }) => {
     localStorage.removeItem("token");
   };
   return (
-    <div className="header">
-      <Link className="logo-container" to="/">
+    <nav
+      className="navbar navbar-expand-lg  navbar-dark bg-danger "
+      style={{ backgroundColor: "#e3f2fd" }}
+    >
+      <Link
+        className="logo-container navbar-brand"
+        style={{ paddingLeft: 50 }}
+        to="/"
+      >
         <Logo className="logo" />
       </Link>
-      <div className="options">
-        <Link className="option" to="/shop">
-          SHOP
-        </Link>
-        <Link className="option" to="/contact">
-          CONTACT
-        </Link>
-
-        {currentUser ? (
-          <div
-            className="option"
-            onClick={() => {
-              handleClick();
-            }}
-          >
-            SIGN OUT
-          </div>
-        ) : (
-          <Link className="option" to="/auth/signin">
-            SIGN IN
-          </Link>
-        )}
-        <CartIcon />
+      <button
+        className="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span className="navbar-toggler-icon"></span>
+      </button>
+      <div
+        className="collapse navbar-collapse navbar-nav ml-auto"
+        id="navbarNav"
+        style={{ paddingLeft: "70%" }}
+      >
+        <ul className="navbar-nav ml-auto">
+          <li className="nav-item">
+            <Link className="option nav-link active" to="/shop">
+              SHOP
+            </Link>
+          </li>
+          <li className="nav-item">
+            {currentUser ? (
+              <div
+                className="option nav-link active"
+                onClick={() => {
+                  handleClick();
+                }}
+              >
+                SIGN OUT
+              </div>
+            ) : (
+              <Link className="option nav-link active" to="/auth/signin">
+                SIGN IN
+              </Link>
+            )}
+          </li>
+          <li className="nav-item">
+            <CartIcon />
+          </li>
+        </ul>
       </div>
       {!props.hidden && <CartDropdown />}
-    </div>
+    </nav>
   );
 };
 
