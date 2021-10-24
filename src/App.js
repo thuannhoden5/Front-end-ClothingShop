@@ -10,7 +10,7 @@ import Search from './components/Search/Search.component';
 import Profile from './components/profile/Profile.component';
 import Shop from './components/Shop/Shop.component';
 import ProductDetail from './components/ProductDetail/ProductDetail';
-import CheckoutPage from './components/checkout/checkoutpage.component'
+import CheckoutPage from './components/checkout/checkoutpage.component';
 function App() {
   return (
     <div>
@@ -21,20 +21,8 @@ function App() {
         <Route path="/product/:id" component={ProductDetail} />
         <Route exact path="/profile" component={Profile} />
         <Route exact path="/checkout" component={CheckoutPage} />
-        <Route
-          exact
-          path="/auth/signup"
-          render={() =>
-            this.props.currentUser ? <Redirect to="/" /> : <SignUp />
-          }
-        />
-        <Route
-          exact
-          path="/auth/signin"
-          render={() =>
-            this.props.currentUser ? <Redirect to="/" /> : <SignIn />
-          }
-        />
+        <Route exact path="/auth/signup" component={SignUp} />
+        <Route exact path="/auth/signin" component={SignIn} />
         <Route exact path="/auth/resetpassword" component={ResetPassword} />
         <Route path="/search" component={Search} />
       </Switch>

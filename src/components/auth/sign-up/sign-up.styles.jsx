@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Container = styled.div`
   background-color: #ffffff;
@@ -16,6 +16,6 @@ export const SignUpContainer = styled.div`
 export const ContainerImage = styled.div`
   width: 75%;
   height: 100%;
-  background-image: url("/signup.jpeg");
+  background-image: url('/signup.jpeg');
   background-size: cover;
 `;

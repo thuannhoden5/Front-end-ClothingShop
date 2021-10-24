@@ -12,7 +12,7 @@ import { Redirect } from 'react-router-dom';
 
 // import axios from "axios";
 
-const SignIn = ({ currentUser }) => {
+const SignIn = () => {
   const [values, setValues] = useState({
     email: '',
     password: '',
@@ -21,6 +21,8 @@ const SignIn = ({ currentUser }) => {
   const dispatch = useDispatch();
   const [err, setErr] = useState('');
   const [isSucceeded, setIsSucceeded] = useState(false);
+  const currentUser = useSelector((state) => state.user.currentUser);
+  if (currentUser) return <Redirect to="/" />;
   // const [loading, setLoading] = useState(false);
   const handleChange = (event) => {
     const { value, name } = event.target;
@@ -29,7 +31,6 @@ const SignIn = ({ currentUser }) => {
       [name]: value,
     });
   };
-  if (currentUser) return <Redirect to="/" />;
   const handleSubmit = async (event) => {
     event.preventDefault();
     setErr(false);
@@ -51,8 +52,7 @@ const SignIn = ({ currentUser }) => {
   return (
     <Container>
       <SignInContainer>
-        <h2>I already have an account</h2>
-        <span>Sign In with email and password</span>
+        <h3>Sign In with email and password</h3>
         {err && (
           <div class="alert alert-danger" role="alert">
             {renderErrorMessage(err)}

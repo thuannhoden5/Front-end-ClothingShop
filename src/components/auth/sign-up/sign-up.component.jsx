@@ -7,12 +7,9 @@ import { ContainerImage } from './sign-up.styles';
 import { setCurrentUser } from '../../../redux/user/user.actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { renderErrorMessage } from '../../../utils/helpers';
+import { Redirect } from 'react-router';
 
 const SignUp = () => {
-  const currentUser = useSelector((state) => state.currentUser);
-
-  console.log('currentUser', currentUser);
-
   const [values, setValues] = useState({
     email: '',
     password: '',
@@ -24,6 +21,8 @@ const SignUp = () => {
   const dispatch = useDispatch();
   const [err, setErr] = useState(null);
   const [isSucceeded, setIsSucceeded] = useState(false);
+  const currentUser = useSelector((state) => state.user.currentUser);
+  if (currentUser) return <Redirect to="/" />;
   const handleChange = (event) => {
     setValues({
       ...values,
@@ -35,7 +34,6 @@ const SignUp = () => {
     setErr(null);
     setIsSucceeded(false);
     const response = await axiosInstance.post('/user/register', values);
-    console.log('response here', response);
 
     if (response.success) {
       setIsSucceeded(true);

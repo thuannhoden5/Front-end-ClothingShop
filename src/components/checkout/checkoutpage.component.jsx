@@ -1,5 +1,9 @@
 import React from 'react';
-import { addItem } from '../../redux/cart/cart.actions';
+import {
+  addItem,
+  clearItemFromCart,
+  removeItem,
+} from '../../redux/cart/cart.actions';
 import { useSelector } from 'react-redux';
 import './Checkout.styles.scss';
 import { useDispatch } from 'react-redux';
@@ -8,11 +12,13 @@ import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 
 const CheckoutPage = () => {
   const cartDetail = useSelector((state) => state.cart.cartItems);
-  const currentUser = useSelector((state) => state.user.currentUser);
-  console.log('currentUser', currentUser);
-
   const dispatch = useDispatch();
   console.log(cartDetail);
+
+  const handleClearItem = (event) => {
+    const productId = event.target.parentNode.parentNode.parentNode.id;
+    dispatch(clearItemFromCart(productId));
+  };
 
   const handleChangeQuantity = (event) => {
     const productId = event.target.parentNode.parentNode.parentNode.id;
@@ -27,7 +33,13 @@ const CheckoutPage = () => {
         }),
       );
     } else {
-      // setQuantity(quantity - 1);
+      dispatch(
+        removeItem({
+          product: cartDetail.find(
+            (cartItem) => cartItem.product._id === productId,
+          ).product,
+        }),
+      );
     }
   };
   return (
@@ -166,7 +178,10 @@ const CheckoutPage = () => {
                 <div id={cartItem.product._id} className="cart-items">
                   <div className="upper-item">
                     <h6 className="my-0">{cartItem.product.title}</h6>
-                    <span className="close-button text-muted">
+                    <span
+                      onClick={handleClearItem}
+                      className="close-button text-muted"
+                    >
                       <FontAwesomeIcon icon={faTimesCircle} />
                     </span>
                   </div>

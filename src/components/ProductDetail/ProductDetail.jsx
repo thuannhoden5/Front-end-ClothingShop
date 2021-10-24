@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router';
+import { useHistory, useParams } from 'react-router';
 import { addItem } from '../../redux/cart/cart.actions';
 import { selectedProducts } from '../../redux/shop/shop.actions';
 import axiosInstance from '../../utils/axios';
@@ -13,27 +13,40 @@ import './ProductDetail.scss';
 
 const ProductDetail = () => {
   const { id } = useParams();
+  const history = useHistory();
   const productDetail = useSelector((state) => state.products.selectedProduct);
   const cartDetail = useSelector((state) => state.cart.cartItems);
   const dispatch = useDispatch();
-  const [quantity, setQuantity] = useState(0);
-  const [err, setErr] = useState('');
-  const buyNow = () => {};
+  const [quantity, setQuantity] = useState(1);
+  console.log(
+    'here',
+    cartDetail.map((cartItem) => {
+      return {
+        productId: cartItem.product._id,
+        quantity: quantity,
+      };
+    }),
+  );
+  const buyNow = async () => {
+    dispatch(addItem({ product: productDetail, quantity: quantity }));
+    // history.replace('/checkout');
+    // const response = await axiosInstance.post('/cart/createOrUpdateCart', {
+    //   items: cartDetail.map((cartItem) => {
+    //     return {
+    //       productId: cartItem.product._id,
+    //       quantity: quantity,
+    //     };
+    //   }),
+    // });
+  };
 
   const addToCart = () => {
-    if (quantity === 0) {
-      setErr('Please add at least one item');
-      return;
-    }
     dispatch(addItem({ product: productDetail, quantity: quantity }));
     console.log('cartDetail here', cartDetail);
   };
 
   const handleChangeQuantity = (event) => {
     if (event.target.value === '+') {
-      if (quantity === 0) {
-        setErr('');
-      }
       setQuantity(quantity + 1);
     } else {
       setQuantity(quantity - 1);
@@ -64,12 +77,12 @@ const ProductDetail = () => {
         <div className="product-price">{productDetail.price}.000 VND</div>
         <div className="product-cart-button">
           <div className="quantity-product">
-            {quantity === 0 && (
+            {quantity === 1 && (
               <CustomSmallButton value={'-'} color="grey">
                 -
               </CustomSmallButton>
             )}
-            {quantity !== 0 && (
+            {quantity > 1 && (
               <CustomSmallButton
                 value={'-'}
                 onClick={handleChangeQuantity}
@@ -96,7 +109,6 @@ const ProductDetail = () => {
             </CustomButton>
           </div>
         </div>
-        <div className="error">{err}</div>
       </div>
     </div>
   );
