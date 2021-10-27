@@ -1,4 +1,3 @@
-import CustomNavbar from './components/Navbar/Navbar';
 import HomePage from './components/Homepage/HomePage.component';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import React from 'react';
@@ -14,7 +13,6 @@ import CheckoutPage from './components/checkout/checkoutpage.component';
 function App() {
   return (
     <div>
-      <CustomNavbar />
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route path="/shop/:directory" component={Shop} />

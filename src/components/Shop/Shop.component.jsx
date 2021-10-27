@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { setProducts } from '../../redux/shop/shop.actions';
 import axiosInstance from '../../utils/axios';
 import ProductListing from '../ProductListing/ProductListing';
+import CustomNavbar from '../Navbar/Navbar';
 
 const Shop = () => {
   const param = useParams();
@@ -27,6 +28,7 @@ const Shop = () => {
   }, []);
   return (
     <div className="shop-page">
+      <CustomNavbar />
       <ProductListing></ProductListing>
       <div></div>
     </div>

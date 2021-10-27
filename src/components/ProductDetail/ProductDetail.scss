@@ -1,9 +1,21 @@
 .product-section {
   display: flex;
   justify-content: center;
-  padding: 40px 0px;
+  // padding: 40px 0px;
   color: black;
   font-weight: 400;
+
+  .section-right {
+    margin-top: 15vh;
+    width: 40%;
+  }
+  .section-left {
+    margin-left: 5%;
+    margin-top: 15vh;
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+  }
 }
 
 .product-rating {
@@ -53,17 +65,6 @@
   color: peachpuff;
 }
 
-.section-right {
-  margin-top: 10vh;
-  width: 40%;
-}
-.section-left {
-  margin-left: 5%;
-  margin-top: 10vh;
-  display: flex;
-  flex-direction: column;
-  width: 40%;
-}
 .product-price {
   margin-top: 4vh;
 }

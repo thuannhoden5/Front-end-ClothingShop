@@ -5,6 +5,8 @@ import { useHistory, useParams } from 'react-router';
 import { addItem } from '../../redux/cart/cart.actions';
 import { selectedProducts } from '../../redux/shop/shop.actions';
 import axiosInstance from '../../utils/axios';
+import CustomNavbar from '../Navbar/Navbar';
+
 import {
   CustomButton,
   CustomSmallButton,
@@ -29,15 +31,7 @@ const ProductDetail = () => {
   );
   const buyNow = async () => {
     dispatch(addItem({ product: productDetail, quantity: quantity }));
-    // history.replace('/checkout');
-    // const response = await axiosInstance.post('/cart/createOrUpdateCart', {
-    //   items: cartDetail.map((cartItem) => {
-    //     return {
-    //       productId: cartItem.product._id,
-    //       quantity: quantity,
-    //     };
-    //   }),
-    // });
+    history.replace('/checkout');
   };
 
   const addToCart = () => {
@@ -57,7 +51,6 @@ const ProductDetail = () => {
     const fetchProductDetail = async (id) => {
       try {
         const response = await axiosInstance.get(`/product/findProduct/${id}`);
-        console.log('product detail here', response.data);
         dispatch(selectedProducts(response.data));
       } catch (err) {
         console.log('error here', err);
@@ -69,6 +62,7 @@ const ProductDetail = () => {
 
   return (
     <div className="product-section">
+      <CustomNavbar />
       <div className="section-right">
         <img src={productDetail.image} alt={productDetail.title} />
       </div>

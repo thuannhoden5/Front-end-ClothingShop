@@ -1,30 +1,39 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react';
+import { ReactComponent as ShoppingIcon } from '../../assets/shopping-bag.svg';
+import './CartIcon.styles.scss';
+import { useDispatch } from 'react-redux';
+import { setItem, toggleCartHidden } from '../../redux/cart/cart.actions';
+import axiosInstance from '../../utils/axios';
 
-import { ReactComponent as ShoppingIcon } from '../../assets/shopping-bag.svg'
-import './CartIcon.styles.scss'
-import { connect} from 'react-redux'
-import { toggleCartHidden } from '../../redux/cart/cart.actions'
-import { selectCartItemsCount } from '../../redux/cart/cart.selectors'
+const CartIcon = () => {
+  const dispatch = useDispatch();
+  const [total, setTotal] = useState();
 
-const CartIcon = ({ toggleCartHidden , cartItems}) => {
+  const fetchCart = async () => {
+    console.log('here', toggleCartHidden());
+    const cart = await axiosInstance.get('cart/findCart');
+    setTotal(
+      cart.data.items.reduce((sum, item) => {
+        return (sum += item.quantity);
+      }, 0),
+    );
+    dispatch(setItem(cart.data.items));
+  };
+
+  useEffect(() => {
+    fetchCart();
+  }, []);
   return (
-    <div className="cart-icon" onClick={toggleCartHidden}>
-      <ShoppingIcon className="shopping-icon"/>
-      <span className="item-count">{cartItems}</span>
+    <div
+      className="cart-icon"
+      onClick={() => {
+        dispatch(toggleCartHidden());
+      }}
+    >
+      <ShoppingIcon className="shopping-icon" />
+      <span className="item-count">{total}</span>
     </div>
-  )
-}
+  );
+};
 
-const mapStateToProps = state => {
-  return{
-    cartItems: selectCartItemsCount(state)
-  }
-}
-
-const mapDispatchToProps = dispatch => {
-  return {
-    toggleCartHidden: () => dispatch(toggleCartHidden())
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(CartIcon)
+export default CartIcon;

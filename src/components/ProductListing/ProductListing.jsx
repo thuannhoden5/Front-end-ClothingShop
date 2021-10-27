@@ -4,8 +4,6 @@ import ProductCard from '../ProductCard/ProductCard';
 import './ProductListing.scss';
 const ProductListing = () => {
   const products = useSelector((state) => state.products.products);
-  console.log('products now here', products);
-
   const renderProducts = (products) => {
     return products.map((product, index) => {
       return <ProductCard key={index} data={product}></ProductCard>;
