@@ -4,6 +4,11 @@
   // border: solid black 1px;
   transition: all 0.3s;
 
+  a {
+    color: #ffffff;
+    text-decoration: none;
+  }
+
   &:hover {
     transform: scale(1.1);
     transition: all 0.3;

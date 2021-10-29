@@ -12,6 +12,8 @@ import { Redirect } from 'react-router';
 const SignUp = () => {
   const [values, setValues] = useState({
     email: '',
+    firstName: '',
+    lastName: '',
     password: '',
     confirmPassword: '',
     address: '',
@@ -63,6 +65,20 @@ const SignUp = () => {
           </div>
         )}
         <form onSubmit={handleSubmit} className="novalidate">
+          <FormInput
+            name="firstName"
+            type="firstName"
+            handleChange={handleChange}
+            label="First Name"
+            errMessage={err}
+          />
+            <FormInput
+            name="lastName"
+            type="lastName"
+            handleChange={handleChange}
+            label="Last Name"
+            errMessage={err}
+          />
           <FormInput
             name="email"
             type="email"

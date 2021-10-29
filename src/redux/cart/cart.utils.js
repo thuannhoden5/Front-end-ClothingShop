@@ -34,3 +34,6 @@ export const checkExistedCartItem = (cartItems, itemWantToCheck) => {
     (cartItem) => cartItem.product._id === itemWantToCheck._id,
   );
 };
+
+export const selectCartItemsCount = (cartItems) =>
+  cartItems.reduce((sum, cartItem) => sum + cartItem.quantity, 0);

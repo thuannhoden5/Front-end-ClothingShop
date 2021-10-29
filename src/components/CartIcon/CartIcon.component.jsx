@@ -1,22 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { ReactComponent as ShoppingIcon } from '../../assets/shopping-bag.svg';
 import './CartIcon.styles.scss';
 import { useDispatch } from 'react-redux';
 import { setItem, toggleCartHidden } from '../../redux/cart/cart.actions';
 import axiosInstance from '../../utils/axios';
+import { useSelector } from 'react-redux';
+import { selectCartItemsCount } from '../../redux/cart/cart.utils';
 
 const CartIcon = () => {
+  const total = useSelector((state) =>
+    selectCartItemsCount(state.cart.cartItems),
+  );
   const dispatch = useDispatch();
-  const [total, setTotal] = useState();
-
   const fetchCart = async () => {
-    console.log('here', toggleCartHidden());
     const cart = await axiosInstance.get('cart/findCart');
-    setTotal(
-      cart.data.items.reduce((sum, item) => {
-        return (sum += item.quantity);
-      }, 0),
-    );
     dispatch(setItem(cart.data.items));
   };
 

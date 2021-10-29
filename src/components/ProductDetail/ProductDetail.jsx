@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router';
@@ -17,26 +16,22 @@ const ProductDetail = () => {
   const { id } = useParams();
   const history = useHistory();
   const productDetail = useSelector((state) => state.products.selectedProduct);
-  const cartDetail = useSelector((state) => state.cart.cartItems);
   const dispatch = useDispatch();
   const [quantity, setQuantity] = useState(1);
-  console.log(
-    'here',
-    cartDetail.map((cartItem) => {
-      return {
-        productId: cartItem.product._id,
-        quantity: quantity,
-      };
-    }),
-  );
   const buyNow = async () => {
+    axiosInstance.post('cart/addItemToCart', {
+      item: { productId: id, price: productDetail.price, quantity: quantity },
+    });
     dispatch(addItem({ product: productDetail, quantity: quantity }));
     history.replace('/checkout');
   };
 
-  const addToCart = () => {
+  const addToCart = async () => {
+    axiosInstance.post('cart/addItemToCart', {
+      item: { productId: id, price: productDetail.price, quantity: quantity },
+    });
+
     dispatch(addItem({ product: productDetail, quantity: quantity }));
-    console.log('cartDetail here', cartDetail);
   };
 
   const handleChangeQuantity = (event) => {
