@@ -14,7 +14,9 @@ const CartIcon = () => {
   const dispatch = useDispatch();
   const fetchCart = async () => {
     const cart = await axiosInstance.get('cart/findCart');
-    dispatch(setItem(cart.data.items));
+    if (cart.sucxess) {
+      dispatch(setItem(cart.data.items));
+    }
   };
 
   useEffect(() => {

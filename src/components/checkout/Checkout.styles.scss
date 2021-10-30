@@ -9,6 +9,16 @@
     width: 50%;
     padding: 2% 5%;
   }
+  .section-left-login {
+    width: 50%;
+    padding: 2% 5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    form {
+      width: 100%;
+    }
+  }
 
   .section-right {
     width: 50%;

@@ -18,6 +18,7 @@ export const SignInContainer = styled.div`
 `;
 export const LinkContainer = styled.div`
   display: flex;
+  margin-top: 2vh;
   justify-content: space-between;
 `;
 export const Footer = styled.div`
